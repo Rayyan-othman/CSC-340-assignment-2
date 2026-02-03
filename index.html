@@ -31,4 +31,97 @@
       </ul>
     </div>
   </div>
-</
+</nav>
+
+<section class="py-5 text-center container">
+  <div class="col-lg-6 col-md-8 mx-auto">
+    <h1 class="fw-light text-white">Naruto Shippuden Character Gallery</h1>
+    <p class="lead text-secondary">Browse Team 7 and legendary shinobi.</p>
+    <input id="searchInput" class="form-control mt-3" type="search"
+           placeholder="Search characters by name or role">
+  </div>
+</section>
+
+<div class="album py-5 bg-dark">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+      <!-- Naruto -->
+      <div class="col character-card" data-search="naruto uzumaki hokage">
+        <div class="card shadow-sm">
+          <img src="img/Naruto.png" height="225" alt="Naruto Uzumaki">
+          <div class="card-body">
+            <h5>Naruto Uzumaki</h5>
+            <p>A determined ninja who dreams of becoming Hokage.</p>
+            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sasuke -->
+      <div class="col character-card" data-search="sasuke uchiha rival">
+        <div class="card shadow-sm">
+          <img src="img/Sasuke.jpg" height="225" alt="Sasuke Uchiha">
+          <div class="card-body">
+            <h5>Sasuke Uchiha</h5>
+            <p>An Uchiha prodigy driven by revenge.</p>
+            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sakura -->
+      <div class="col character-card" data-search="sakura haruno medical">
+        <div class="card shadow-sm">
+          <img src="img/Sakura.jpg" height="225" alt="Sakura Haruno">
+          <div class="card-body">
+            <h5>Sakura Haruno</h5>
+            <p>A skilled medical ninja with immense strength.</p>
+            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kakashi -->
+      <div class="col character-card" data-search="kakashi hatake sensei">
+        <div class="card shadow-sm">
+          <img src="img/Kakashi.jpg" height="225" alt="Kakashi Hatake">
+          <div class="card-body">
+            <h5>Kakashi Hatake</h5>
+            <p>The Copy Ninja and mentor of Team 7.</p>
+            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jiraiya -->
+      <div class="col character-card" data-search="jiraiya sannin mentor">
+        <div class="card shadow-sm">
+          <img src="img/Jiraiya.jpg" height="225" alt="Jiraiya">
+          <div class="card-body">
+            <h5>Jiraiya</h5>
+            <p>A Legendary Sannin and Naruto’s mentor.</p>
+            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById("searchInput");
+  const cards = document.querySelectorAll(".character-card");
+  input.addEventListener("input", () => {
+    const q = input.value.toLowerCase();
+    cards.forEach(c => {
+      c.style.display = c.dataset.search.includes(q) ? "" : "none";
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+ 
