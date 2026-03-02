@@ -8,22 +8,26 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body { background:#121212; }
+    body { background:#121212; color:#ffffff; }
     .panel { background:#2b2b2b; border:1px solid #3a3a3a; }
-    .muted { color:#b9b9b9; }
-    .big-img { width:100%; max-height:500px; object-fit:cover; }
+    .muted { color:#c7c7c7; }
+    .big-img { width:100%; max-height:520px; object-fit:cover; }
+    .tag { background:#1c1c1c; border:1px solid #3a3a3a; }
+    h2, h5 { color:#ffffff; }
   </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
   <div class="container">
     <a class="navbar-brand" href="index.html">Naruto Gallery</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="nav" class="collapse navbar-collapse">
+
+    <div id="navbarNav" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link active" href="details.html">Details</a></li>
@@ -34,47 +38,242 @@
   </div>
 </nav>
 
-<main class="py-5 container">
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-9 mx-auto">
+      <h1 class="fw-light">Character Details</h1>
+      <p class="lead text-secondary">
+        Expanded profiles for each character featured on the home page.
+      </p>
+    </div>
+  </div>
+</section>
 
-<!-- Naruto -->
-<div class="panel p-4 mb-5">
-  <img src="img/Naruto.png" class="big-img mb-3" alt="Naruto Uzumaki">
-  <h2>Naruto Uzumaki</h2>
-  <p class="muted">Hidden Leaf ninja who rises from outcast to hero.</p>
-</div>
+<main class="pb-5">
+  <div class="container">
 
-<!-- Sasuke -->
-<div class="panel p-4 mb-5">
-  <img src="img/Sasuke.jpg" class="big-img mb-3" alt="Sasuke Uchiha">
-  <h2>Sasuke Uchiha</h2>
-  <p class="muted">An Uchiha survivor driven by revenge and justice.</p>
-</div>
+    <!-- ============================ NARUTO ============================ -->
+    <div class="panel rounded-3 p-4 mb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-4">
+          <img src="img/Naruto.png" class="big-img rounded-3" alt="Naruto Uzumaki">
+        </div>
+        <div class="col-lg-8">
+          <h2 class="mb-2">Naruto Uzumaki</h2>
+          <p class="muted">
+            Naruto starts as an underestimated outcast and grows into a hero who inspires others through
+            perseverance, loyalty, and empathy. He refuses to abandon anyone—even enemies.
+          </p>
 
-<!-- Sakura -->
-<div class="panel p-4 mb-5">
-  <img src="img/Sakura.jpg" class="big-img mb-3" alt="Sakura Haruno">
-  <h2>Sakura Haruno</h2>
-  <p class="muted">Elite medical ninja with superhuman strength.</p>
-</div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge tag text-light">Village: Hidden Leaf</span>
+            <span class="badge tag text-light">Role: Protagonist</span>
+            <span class="badge tag text-light">Team: Team 7</span>
+          </div>
 
-<!-- Kakashi -->
-<div class="panel p-4 mb-5">
-  <img src="img/Kakashi.jpg" class="big-img mb-3" alt="Kakashi Hatake">
-  <h2>Kakashi Hatake</h2>
-  <p class="muted">Veteran sensei known as the Copy Ninja.</p>
-</div>
+          <h5>Backstory (summary)</h5>
+          <p class="muted">
+            Naruto’s childhood is shaped by isolation and a desire to prove himself. Over time, he earns respect
+            by protecting others and stepping up when it matters most.
+          </p>
 
-<!-- Jiraiya -->
-<div class="panel p-4 mb-5">
-  <img src="img/Jiraiya.jpg" class="big-img mb-3" alt="Jiraiya">
-  <h2>Jiraiya</h2>
-  <p class="muted">Legendary Sannin and powerful mentor.</p>
-</div>
+          <h5>Abilities</h5>
+          <ul class="muted">
+            <li>Shadow Clone Technique (creative tactics)</li>
+            <li>Rasengan (signature chakra attack)</li>
+            <li>High stamina and endurance</li>
+            <li>Strong leadership and teamwork focus</li>
+          </ul>
 
-<div class="text-center">
-  <a href="index.html" class="btn btn-outline-light">Back to Home</a>
-</div>
+          <h5>Personality</h5>
+          <ul class="muted mb-0">
+            <li>Determined and optimistic</li>
+            <li>Protective of friends</li>
+            <li>Can be impulsive but learns fast</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
+    <!-- ============================ SASUKE ============================ -->
+    <div class="panel rounded-3 p-4 mb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-4">
+          <img src="img/sasuke.jpg" class="big-img rounded-3" alt="Sasuke Uchiha">
+        </div>
+        <div class="col-lg-8">
+          <h2 class="mb-2">Sasuke Uchiha</h2>
+          <p class="muted">
+            Sasuke is an Uchiha prodigy shaped by tragedy. His drive for revenge pushes him to seek power,
+            but his journey forces him to rethink loyalty and justice.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge tag text-light">Village: Hidden Leaf (formerly)</span>
+            <span class="badge tag text-light">Role: Rival</span>
+            <span class="badge tag text-light">Clan: Uchiha</span>
+          </div>
+
+          <h5>Backstory (summary)</h5>
+          <p class="muted">
+            Sasuke’s identity is tied to his clan. He believes strength is the only way to prevent helplessness,
+            and this belief drives many of his biggest decisions.
+          </p>
+
+          <h5>Abilities</h5>
+          <ul class="muted">
+            <li>Sharingan (visual jutsu, perception, prediction)</li>
+            <li>Lightning Style + Chidori</li>
+            <li>Swordsmanship and speed-based fighting</li>
+            <li>Strong tactical intelligence</li>
+          </ul>
+
+          <h5>Personality</h5>
+          <ul class="muted mb-0">
+            <li>Quiet, focused, intense</li>
+            <li>Highly competitive</li>
+            <li>Slow to trust but deeply committed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ SAKURA ============================ -->
+    <div class="panel rounded-3 p-4 mb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-4">
+          <img src="img/sakura.jpg" class="big-img rounded-3" alt="Sakura Haruno">
+        </div>
+        <div class="col-lg-8">
+          <h2 class="mb-2">Sakura Haruno</h2>
+          <p class="muted">
+            Sakura becomes an elite medical ninja through discipline and intelligence. She’s a key support
+            fighter who can heal teammates and deliver heavy hits in combat.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge tag text-light">Village: Hidden Leaf</span>
+            <span class="badge tag text-light">Role: Medical Ninja</span>
+            <span class="badge tag text-light">Team: Team 7</span>
+          </div>
+
+          <h5>Backstory (summary)</h5>
+          <p class="muted">
+            Starting with strong academics, Sakura trains to become dependable in battle. Real missions push her
+            to grow into a confident ninja who can protect others.
+          </p>
+
+          <h5>Abilities</h5>
+          <ul class="muted">
+            <li>Advanced medical ninjutsu</li>
+            <li>Exceptional chakra control</li>
+            <li>Superhuman strength</li>
+            <li>Battlefield healing & support</li>
+          </ul>
+
+          <h5>Personality</h5>
+          <ul class="muted mb-0">
+            <li>Focused and hardworking</li>
+            <li>Protective of allies</li>
+            <li>Mentally tough under pressure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ KAKASHI ============================ -->
+    <div class="panel rounded-3 p-4 mb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-4">
+          <img src="img/kakashi.jpg" class="big-img rounded-3" alt="Kakashi Hatake">
+        </div>
+        <div class="col-lg-8">
+          <h2 class="mb-2">Kakashi Hatake</h2>
+          <p class="muted">
+            Kakashi is a veteran jōnin and Team 7 mentor known for strategy and calm leadership. He teaches
+            teamwork and survival before ego and glory.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge tag text-light">Village: Hidden Leaf</span>
+            <span class="badge tag text-light">Role: Sensei / Jōnin</span>
+            <span class="badge tag text-light">Known as: Copy Ninja</span>
+          </div>
+
+          <h5>Backstory (summary)</h5>
+          <p class="muted">
+            Kakashi’s past includes major loss, shaping his priorities as a leader. He focuses on protecting his
+            team and making smart decisions under pressure.
+          </p>
+
+          <h5>Abilities</h5>
+          <ul class="muted">
+            <li>Lightning Blade (Chidori variant)</li>
+            <li>Strong ninjutsu variety and adaptability</li>
+            <li>Stealth, tracking, and intelligence skills</li>
+            <li>Battle planning and leadership</li>
+          </ul>
+
+          <h5>Personality</h5>
+          <ul class="muted mb-0">
+            <li>Composed and observant</li>
+            <li>Dry humor, calm under stress</li>
+            <li>Protective mentor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ JIRAIYA ============================ -->
+    <div class="panel rounded-3 p-4 mb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-4">
+          <img src="img/jiraiyah.jpg" class="big-img rounded-3" alt="Jiraiya">
+        </div>
+        <div class="col-lg-8">
+          <h2 class="mb-2">Jiraiya</h2>
+          <p class="muted">
+            Jiraiya is one of the Legendary Sannin—an elite ninja and writer who trains future leaders, gathers
+            intelligence, and fights using powerful toad-based techniques.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge tag text-light">Village: Hidden Leaf</span>
+            <span class="badge tag text-light">Role: Mentor</span>
+            <span class="badge tag text-light">Title: Legendary Sannin</span>
+          </div>
+
+          <h5>Backstory (summary)</h5>
+          <p class="muted">
+            Despite his goofy behavior, Jiraiya takes responsibility seriously. He travels for intel and to protect
+            the bigger picture, mentoring the next generation to create a better future.
+          </p>
+
+          <h5>Abilities</h5>
+          <ul class="muted">
+            <li>Toad summoning techniques</li>
+            <li>Sage Mode (senjutsu power boost)</li>
+            <li>Rasengan mastery</li>
+            <li>Reconnaissance/espionage experience</li>
+          </ul>
+
+          <h5>Personality</h5>
+          <ul class="muted mb-0">
+            <li>Wise but eccentric</li>
+            <li>Protective mentor</li>
+            <li>Strong moral compass</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="index.html" class="btn btn-outline-light me-2">Back to Home</a>
+      <a href="about.html" class="btn btn-outline-light me-2">About</a>
+      <a href="new-character-form.html" class="btn btn-outline-light">Add a Character</a>
+    </div>
+
+  </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
