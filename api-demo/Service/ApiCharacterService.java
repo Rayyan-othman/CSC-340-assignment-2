@@ -1,9 +1,10 @@
-package com;
+package com.CSC._0.Rayyan.othman.api_demo.service;
 
+import com.CSC._0.Rayyan.othman.api_demo.model.ApiCharacter;
+import com.CSC._0.Rayyan.othman.api_demo.repository.ApiCharacterRepository;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-
-import com.CSC.ApiCharacter;
 
 public interface ApiCharacterService {
 

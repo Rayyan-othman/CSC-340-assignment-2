@@ -1,10 +1,10 @@
-package com.CSC;
+package com.CSC._0.Rayyan.othman.api_demo.controller;
 
 import com.CSC._0.Rayyan.othman.api_demo.model.ApiCharacter;
 import com.CSC._0.Rayyan.othman.api_demo.service.ApiCharacterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.util.List;
 
 @RestController

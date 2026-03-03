@@ -1,4 +1,4 @@
-package com.CSC;
+package com.CSC._0.Rayyan.othman.api_demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
