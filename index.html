@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,8 +10,9 @@
 
   <style>
     body { background:#121212; }
-    .card { background:#2b2b2b; color:#fff; }
-    .card img { object-fit: cover; }
+    .card { background:#2b2b2b; color:#fff; border:1px solid #3a3a3a; }
+    .card img { object-fit: cover; width:100%; }
+    .muted { color:#b9b9b9; }
   </style>
 </head>
 
@@ -34,94 +36,124 @@
 </nav>
 
 <section class="py-5 text-center container">
-  <div class="col-lg-6 col-md-8 mx-auto">
+  <div class="col-lg-7 col-md-9 mx-auto">
     <h1 class="fw-light text-white">Naruto Shippuden Character Gallery</h1>
-    <p class="lead text-secondary">Browse Team 7 and legendary shinobi.</p>
-    <input id="searchInput" class="form-control mt-3" type="search"
-           placeholder="Search characters by name or role">
+    <p class="lead text-secondary">Loaded from your Spring Boot API (Neon/Postgres).</p>
+
+    <div class="row g-2 mt-3">
+      <div class="col-md-6">
+        <input id="searchInput" class="form-control" type="search"
+               placeholder="Search characters by name">
+      </div>
+      <div class="col-md-4">
+        <input id="roleInput" class="form-control" type="text"
+               placeholder="Role filter (optional)">
+      </div>
+      <div class="col-md-2 d-grid">
+        <button id="refreshBtn" class="btn btn-outline-light">Refresh</button>
+      </div>
+    </div>
+
+    <p id="status" class="small muted mt-3 mb-0"></p>
   </div>
 </section>
 
 <div class="album py-5 bg-dark">
   <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-
-      <!-- Naruto -->
-      <div class="col character-card" data-search="naruto uzumaki hokage">
-        <div class="card shadow-sm">
-          <img src="img/Naruto.png" height="225" alt="Naruto Uzumaki">
-          <div class="card-body">
-            <h5>Naruto Uzumaki</h5>
-            <p>A determined ninja who dreams of becoming Hokage.</p>
-            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sasuke -->
-      <div class="col character-card" data-search="sasuke uchiha rival">
-        <div class="card shadow-sm">
-          <img src="img/Sasuke.jpg" height="225" alt="Sasuke Uchiha">
-          <div class="card-body">
-            <h5>Sasuke Uchiha</h5>
-            <p>An Uchiha prodigy driven by revenge.</p>
-            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sakura -->
-      <div class="col character-card" data-search="sakura haruno medical">
-        <div class="card shadow-sm">
-          <img src="img/Sakura.jpg" height="225" alt="Sakura Haruno">
-          <div class="card-body">
-            <h5>Sakura Haruno</h5>
-            <p>A skilled medical ninja with immense strength.</p>
-            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kakashi -->
-      <div class="col character-card" data-search="kakashi hatake sensei">
-        <div class="card shadow-sm">
-          <img src="img/Kakashi.jpg" height="225" alt="Kakashi Hatake">
-          <div class="card-body">
-            <h5>Kakashi Hatake</h5>
-            <p>The Copy Ninja and mentor of Team 7.</p>
-            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Jiraiya -->
-      <div class="col character-card" data-search="jiraiya sannin mentor">
-        <div class="card shadow-sm">
-          <img src="img/Jiraiya.jpg" height="225" alt="Jiraiya">
-          <div class="card-body">
-            <h5>Jiraiya</h5>
-            <p>A Legendary Sannin and Naruto’s mentor.</p>
-            <a href="details.html" class="btn btn-sm btn-outline-light">View</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <!-- API cards render here -->
+    <div id="charactersRow" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"></div>
   </div>
 </div>
 
 <script>
-  const input = document.getElementById("searchInput");
-  const cards = document.querySelectorAll(".character-card");
-  input.addEventListener("input", () => {
-    const q = input.value.toLowerCase();
-    cards.forEach(c => {
-      c.style.display = c.dataset.search.includes(q) ? "" : "none";
-    });
-  });
+  const API_BASE = "http://localhost:8080"; // change to 8081 if you changed backend port
+
+  const row = document.getElementById("charactersRow");
+  const statusEl = document.getElementById("status");
+  const searchInput = document.getElementById("searchInput");
+  const roleInput = document.getElementById("roleInput");
+  const refreshBtn = document.getElementById("refreshBtn");
+
+  function setStatus(msg) { statusEl.textContent = msg || ""; }
+
+  function cardHtml(c) {
+    const img = (c.imageUrl && c.imageUrl.trim()) ? c.imageUrl : "img/Naruto.png";
+    const name = c.name ?? "";
+    const role = c.role ?? "";
+    const desc = c.description ?? "";
+
+    return `
+      <div class="col">
+        <div class="card shadow-sm h-100">
+          <img src="${img}" height="225" alt="${name}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="mb-1">${name}</h5>
+            <div class="small muted mb-2">${role}</div>
+            <p class="mb-3">${desc}</p>
+
+            <div class="mt-auto d-flex gap-2">
+              <button class="btn btn-sm btn-outline-light" onclick="deleteCharacter(${c.id})">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  async function fetchCharacters() {
+    // If role is provided, use /characters/by-role?role=...
+    // Otherwise, use /characters
+    const role = roleInput.value.trim();
+    const url = role
+      ? `${API_BASE}/characters/by-role?role=${encodeURIComponent(role)}`
+      : `${API_BASE}/characters`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json();
+  }
+
+  async function loadCharacters() {
+    try {
+      setStatus("Loading...");
+      const characters = await fetchCharacters();
+
+      // client-side name search (optional)
+      const q = searchInput.value.trim().toLowerCase();
+      const filtered = q
+        ? characters.filter(c => (c.name || "").toLowerCase().includes(q))
+        : characters;
+
+      row.innerHTML = filtered.map(cardHtml).join("");
+      setStatus(`Loaded ${filtered.length} character(s).`);
+    } catch (err) {
+      row.innerHTML = "";
+      setStatus(`Failed to load. Is backend running? (${err.message})`);
+    }
+  }
+
+  async function deleteCharacter(id) {
+    if (!confirm("Delete this character?")) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/characters/${id}`, { method: "DELETE" });
+      if (!res.ok && res.status !== 204) throw new Error(`Delete failed: ${res.status}`);
+      loadCharacters();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  // expose for onclick
+  window.deleteCharacter = deleteCharacter;
+
+  refreshBtn.addEventListener("click", loadCharacters);
+  searchInput.addEventListener("input", loadCharacters);
+
+  // load on start
+  window.addEventListener("DOMContentLoaded", loadCharacters);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
- 

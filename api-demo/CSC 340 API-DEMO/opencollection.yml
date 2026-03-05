@@ -1,0 +1,10 @@
+opencollection: 1.0.0
+
+info:
+  name: CSC 340 API-DEMO
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

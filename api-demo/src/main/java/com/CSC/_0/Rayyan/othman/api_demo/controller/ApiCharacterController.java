@@ -1,8 +1,11 @@
+// src/main/java/com/CSC/_0/Rayyan/othman/api_demo/controller/ApiCharacterController.java
 package com.CSC._0.Rayyan.othman.api_demo.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.CSC._0.Rayyan.othman.api_demo.model.ApiCharacter;
 import com.CSC._0.Rayyan.othman.api_demo.service.ApiCharacterService;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/characters")
+@RequestMapping
 public class ApiCharacterController {
 
     private final ApiCharacterService service;
@@ -26,54 +30,61 @@ public class ApiCharacterController {
         this.service = service;
     }
 
-    // Get all characters
-    @GetMapping
+    // Health check (quick test)
+    @GetMapping("/ping")
+    public String ping() {
+        return "ok";
+    }
+
+    // PART B: Endpoints
+
+    // GET all
+    @GetMapping("/characters")
     public List<ApiCharacter> getAllCharacters() {
         return service.getAllCharacters();
     }
 
-    // Get a character by its ID
-    @GetMapping("/{id}")
+    // GET by id
+    @GetMapping("/characters/{id}")
     public ResponseEntity<ApiCharacter> getCharacterById(@PathVariable Long id) {
         return service.getCharacterById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Add a new character
-    @PostMapping
+    // POST create
+    @PostMapping("/characters")
     public ResponseEntity<ApiCharacter> addCharacter(@RequestBody ApiCharacter c) {
-        if (c.getName() == null || c.getDescription() == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(service.addCharacter(c));
+        ApiCharacter saved = service.addCharacter(c);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    // Update an existing character
-    @PutMapping("/{id}")
+    // PUT update
+    @PutMapping("/characters/{id}")
     public ResponseEntity<ApiCharacter> updateCharacter(@PathVariable Long id, @RequestBody ApiCharacter c) {
         return service.updateCharacter(id, c)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Delete an existing character
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCharacter(@PathVariable Long id) {
+    // DELETE
+    @DeleteMapping("/characters/{id}")
+    public ResponseEntity<Void> deleteCharacter(@PathVariable Long id) {
         boolean deleted = service.deleteCharacter(id);
-        if (!deleted) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok("Deleted character with id " + id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    // Get all characters of a given category (example: universe)
-    @GetMapping("/category/{category}")
-    public List<ApiCharacter> getByCategory(@PathVariable String category) {
-        return service.getByCategory(category);
+    // Custom Query #1: category/role filter (uses request param)
+    // Example: /characters/by-role?role=Sensei
+    @GetMapping("/characters/by-role")
+    public List<ApiCharacter> getByRole(@RequestParam String role) {
+        return service.getByRole(role);
     }
 
-    // Get characters whose name contains a string
-    @GetMapping("/search")
-    public List<ApiCharacter> search(@RequestParam String name) {
+    // Custom Query #2: name contains search
+    // Example: /characters/search?name=nar
+    @GetMapping("/characters/search")
+    public List<ApiCharacter> searchByName(@RequestParam String name) {
         return service.searchByName(name);
     }
 }

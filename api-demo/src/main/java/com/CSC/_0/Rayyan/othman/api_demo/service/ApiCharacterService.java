@@ -1,3 +1,4 @@
+// src/main/java/com/CSC/_0/Rayyan/othman/api_demo/service/ApiCharacterService.java
 package com.CSC._0.Rayyan.othman.api_demo.service;
 
 import java.util.List;
@@ -11,45 +12,47 @@ import com.CSC._0.Rayyan.othman.api_demo.repository.ApiCharacterRepository;
 @Service
 public class ApiCharacterService {
 
-    private final ApiCharacterRepository repository;
+    private final ApiCharacterRepository repo;
 
-    public ApiCharacterService(ApiCharacterRepository repository) {
-        this.repository = repository;
+    public ApiCharacterService(ApiCharacterRepository repo) {
+        this.repo = repo;
     }
 
     public List<ApiCharacter> getAllCharacters() {
-        return repository.findAll();
+        return repo.findAll();
     }
 
     public Optional<ApiCharacter> getCharacterById(Long id) {
-        return repository.findById(id);
+        return repo.findById(id);
     }
 
     public ApiCharacter addCharacter(ApiCharacter c) {
-        return repository.save(c);
+        return repo.save(c);
     }
 
     public Optional<ApiCharacter> updateCharacter(Long id, ApiCharacter updated) {
-        return repository.findById(id).map(existing -> {
+        return repo.findById(id).map(existing -> {
             existing.setName(updated.getName());
-            existing.setDescription(updated.getDescription());
             existing.setUniverse(updated.getUniverse());
-            existing.setSpecies(updated.getSpecies());
-            return repository.save(existing);
+            existing.setRole(updated.getRole());
+            existing.setImageUrl(updated.getImageUrl());
+            existing.setDescription(updated.getDescription());
+            return repo.save(existing);
         });
     }
 
     public boolean deleteCharacter(Long id) {
-        if (!repository.existsById(id)) return false;
-        repository.deleteById(id);
+        if (!repo.existsById(id)) return false;
+        repo.deleteById(id);
         return true;
     }
 
-    public List<ApiCharacter> getByCategory(String category) {
-        return repository.findByUniverseIgnoreCase(category);
+    // ✅ this fixes your "undefined" call
+    public List<ApiCharacter> getByRole(String role) {
+        return repo.findByRoleIgnoreCase(role);
     }
 
-    public List<ApiCharacter> searchByName(String substring) {
-        return repository.findByNameContainingIgnoreCase(substring);
+    public List<ApiCharacter> searchByName(String name) {
+        return repo.findByNameContainingIgnoreCase(name);
     }
 }

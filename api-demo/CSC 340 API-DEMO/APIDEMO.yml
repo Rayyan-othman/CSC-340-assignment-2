@@ -1,0 +1,31 @@
+info:
+  name: APIDEMO
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: http://localhost:8080/characters?"name"="Sasuke Uchiha",&"description"="Sharingan user",&"universe"="Naruto",&"species"="Human"
+  params:
+    - name: ""
+      value: "{"
+      type: query
+    - name: '"name"'
+      value: '"Sasuke Uchiha",'
+      type: query
+    - name: '"description"'
+      value: '"Sharingan user",'
+      type: query
+    - name: '"universe"'
+      value: '"Naruto",'
+      type: query
+    - name: '"species"'
+      value: '"Human"'
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

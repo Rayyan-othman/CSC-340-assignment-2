@@ -5,43 +5,53 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "characters")
 public class ApiCharacter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long characterId;
+    private Long id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String description;
-
-    // extra attributes (category = universe)
-    @Column(nullable = false)
     private String universe;
+    private String role;
+    private String imageUrl;
 
-    @Column(nullable = false)
-    private String species;
+    @Column(length = 2000)
+    private String description;
 
     public ApiCharacter() {}
 
-    public Long getCharacterId() { return characterId; }
-    public void setCharacterId(Long characterId) { this.characterId = characterId; }
+    public ApiCharacter(String name, String universe, String role, String imageUrl, String description) {
+        this.name = name;
+        this.universe = universe;
+        this.role = role;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
+    public Long getId() { return id; }
 
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
 
     public String getUniverse() { return universe; }
+
+    public String getRole() { return role; }
+
+    public String getImageUrl() { return imageUrl; }
+
+    public String getDescription() { return description; }
+
+    public void setId(Long id) { this.id = id; }
+
+    public void setName(String name) { this.name = name; }
+
     public void setUniverse(String universe) { this.universe = universe; }
 
-    public String getSpecies() { return species; }
-    public void setSpecies(String species) { this.species = species; }
+    public void setRole(String role) { this.role = role; }
+
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void setDescription(String description) { this.description = description; }
 }
