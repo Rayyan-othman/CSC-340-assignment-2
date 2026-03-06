@@ -1,0 +1,24 @@
+info:
+  name: kakashi psot
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: http://localhost:8080/characters
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Kakashi Hatake",
+        "universe": "Naruto",
+        "role": "Sensei",
+        "description": "The Copy Ninja and leader of Team 7 known for his Sharingan and calm leadership."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

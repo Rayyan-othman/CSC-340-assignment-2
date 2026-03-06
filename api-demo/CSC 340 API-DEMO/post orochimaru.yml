@@ -1,0 +1,24 @@
+info:
+  name: post orochimaru
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: http://localhost:8080/characters
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Orochimaru",
+        "universe": "Naruto",
+        "role": "Villain",
+        "description": "A rogue ninja obsessed with immortality."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,24 @@
+info:
+  name: post jiraiyah senssei
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: http://localhost:8080/characters
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Jiraiya",
+        "universe": "Naruto",
+        "role": "Sensei",
+        "description": "One of the Legendary Sannin and Naruto’s mentor, known for his powerful sage techniques."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

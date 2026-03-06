@@ -1,0 +1,24 @@
+info:
+  name: delete madara post
+  type: http
+  seq: 12
+
+http:
+  method: DELETE
+  url: http://localhost:8080/characters/11
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Madara Uchiha",
+        "universe": "Naruto",
+        "role": "Villain",
+        "description": "Legendary Uchiha clan leader"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

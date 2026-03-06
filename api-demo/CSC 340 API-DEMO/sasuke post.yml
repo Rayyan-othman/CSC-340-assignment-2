@@ -1,0 +1,24 @@
+info:
+  name: sasuke post
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: http://localhost:8080/characters
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Sasuke Uchiha",
+        "universe": "Naruto",
+        "role": "Rival",
+        "description": "A prodigy of the Uchiha clan driven by revenge who later becomes one of the strongest shinobi."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
