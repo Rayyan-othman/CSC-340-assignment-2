@@ -2,8 +2,8 @@
 
 A RESTful API for managing Naruto characters, built with Spring Boot, Spring Data JPA, and PostgreSQL. This project demonstrates the fundamentals of building REST APIs with Spring Boot, including database integration, layered architecture, and CRUD operations.
 
----
-
+---link to video
+https://uncg-my.sharepoint.com/:f:/g/personal/raothman_uncg_edu/IgDMiuwu_Z6jRa6ixOUMd-v-AbqP9FTDJTpxz6hSvMnkbwo?e=AjiXps
 # Table of Contents
 
 - What is This Project?
