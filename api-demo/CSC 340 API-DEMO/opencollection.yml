@@ -1,7 +1,18 @@
 opencollection: 1.0.0
 
 info:
-  name: CSC 340 API-DEMO
+  name: Character API Demo
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
 bundled: false
 extensions:
   bruno:

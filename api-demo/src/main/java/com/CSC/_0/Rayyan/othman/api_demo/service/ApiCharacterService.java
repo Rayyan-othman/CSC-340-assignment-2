@@ -35,7 +35,6 @@ public class ApiCharacterService {
             existing.setName(updated.getName());
             existing.setUniverse(updated.getUniverse());
             existing.setRole(updated.getRole());
-            existing.setImageUrl(updated.getImageUrl());
             existing.setDescription(updated.getDescription());
             return repo.save(existing);
         });
