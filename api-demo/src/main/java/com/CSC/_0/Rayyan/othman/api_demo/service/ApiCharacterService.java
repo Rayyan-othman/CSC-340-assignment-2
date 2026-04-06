@@ -46,7 +46,7 @@ public class ApiCharacterService {
         return true;
     }
 
-    // ✅ this fixes your "undefined" call
+   
     public List<ApiCharacter> getByRole(String role) {
         return repo.findByRoleIgnoreCase(role);
     }
