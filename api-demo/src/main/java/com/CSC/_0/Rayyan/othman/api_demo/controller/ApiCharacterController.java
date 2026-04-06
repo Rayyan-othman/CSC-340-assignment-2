@@ -1,3 +1,4 @@
+// src/main/java/com/CSC/_0/Rayyan/othman/api_demo/controller/ApiCharacterController.java
 package com.CSC._0.Rayyan.othman.api_demo.controller;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import com.CSC._0.Rayyan.othman.api_demo.service.ApiCharacterService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/characters")
+@RequestMapping
 public class ApiCharacterController {
 
     private final ApiCharacterService service;
@@ -29,48 +30,60 @@ public class ApiCharacterController {
         this.service = service;
     }
 
+    // Health check (quick test)
     @GetMapping("/ping")
     public String ping() {
         return "ok";
     }
 
-    @GetMapping
+    // PART B: Endpoints
+
+    // GET all
+    @GetMapping("/characters")
     public List<ApiCharacter> getAllCharacters() {
         return service.getAllCharacters();
     }
 
-    @GetMapping("/{id}")
+    // GET by id
+    @GetMapping("/characters/{id}")
     public ResponseEntity<ApiCharacter> getCharacterById(@PathVariable Long id) {
         return service.getCharacterById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    // POST create
+    @PostMapping("/characters")
     public ResponseEntity<ApiCharacter> addCharacter(@RequestBody ApiCharacter c) {
         ApiCharacter saved = service.addCharacter(c);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    @PutMapping("/{id}")
+    // PUT update
+    @PutMapping("/characters/{id}")
     public ResponseEntity<ApiCharacter> updateCharacter(@PathVariable Long id, @RequestBody ApiCharacter c) {
         return service.updateCharacter(id, c)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    // DELETE
+    @DeleteMapping("/characters/{id}")
     public ResponseEntity<Void> deleteCharacter(@PathVariable Long id) {
         boolean deleted = service.deleteCharacter(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/by-role")
+    // Custom Query #1: category/role filter (uses request param)
+    // Example: /characters/by-role?role=Sensei
+    @GetMapping("/characters/by-role")
     public List<ApiCharacter> getByRole(@RequestParam String role) {
         return service.getByRole(role);
     }
 
-    @GetMapping("/search")
+    // Custom Query #2: name contains search
+    // Example: /characters/search?name=nar
+    @GetMapping("/characters/search")
     public List<ApiCharacter> searchByName(@RequestParam String name) {
         return service.searchByName(name);
     }
