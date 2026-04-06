@@ -30,7 +30,6 @@ public class CharacterViewController {
     public String getCharacterById(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
                 .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
-
         model.addAttribute("character", character);
         return "character-details";
     }
@@ -51,7 +50,6 @@ public class CharacterViewController {
     public String showUpdateForm(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
                 .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
-
         model.addAttribute("character", character);
         return "character-update";
     }
