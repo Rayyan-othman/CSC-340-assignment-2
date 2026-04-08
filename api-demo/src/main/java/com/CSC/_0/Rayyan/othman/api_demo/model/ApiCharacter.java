@@ -16,6 +16,7 @@ public class ApiCharacter {
     private String universe;
     private String role;
     private String description;
+    private String imageUrl;
 
     public ApiCharacter() {}
 
