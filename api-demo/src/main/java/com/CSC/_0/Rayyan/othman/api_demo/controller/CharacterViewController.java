@@ -65,4 +65,5 @@ public class CharacterViewController {
         characterService.deleteCharacter(id);
         return "redirect:/characters";
     }
+
 }
