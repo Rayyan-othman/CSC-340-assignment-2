@@ -11,6 +11,7 @@
   </style>
 </head>
 <body>
+
 <div class="container py-5">
   <div class="panel p-4 rounded-3 text-white">
     <h2 class="mb-4">Create Character</h2>
@@ -36,10 +37,16 @@
         <textarea name="description" class="form-control" rows="4" required></textarea>
       </div>
 
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="text" name="imageUrl" class="form-control" placeholder="/img/naruto.png">
+      </div>
+
       <button type="submit" class="btn btn-outline-light">Create</button>
       <a href="/characters" class="btn btn-secondary">Cancel</a>
     </form>
   </div>
 </div>
+
 </body>
 </html>

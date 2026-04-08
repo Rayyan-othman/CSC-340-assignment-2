@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.CSC._0.Rayyan.othman.api_demo.model.ApiCharacter;
 import com.CSC._0.Rayyan.othman.api_demo.service.ApiCharacterService;
 
-@RestController
 @CrossOrigin(origins = "*")
+@RestController
 @RequestMapping("/api/characters")
 public class ApiCharacterController {
 
