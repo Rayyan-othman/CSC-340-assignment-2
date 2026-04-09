@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class ApiCharacter {
@@ -16,27 +17,87 @@ public class ApiCharacter {
     private String universe;
     private String role;
     private String description;
+    private String imageUrl;
 
     public ApiCharacter() {}
 
-    public ApiCharacter(String name, String universe, String role, String description) {
+    public ApiCharacter(String name, String universe, String role, String description, String imageUrl) {
         this.name = name;
         this.universe = universe;
         this.role = role;
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    // IMPORTANT FOR FORM BINDING
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getUniverse() { return universe; }
-    public void setUniverse(String universe) { this.universe = universe; }
+    public String getName() {
+        return name;
+    }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getUniverse() {
+        return universe;
+    }
+
+    public void setUniverse(String universe) {
+        this.universe = universe;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Transient
+    public String getResolvedImage() {
+        String n = name == null ? "" : name.trim().toLowerCase();
+
+        if (n.contains("sasuke")) {
+            return "/img/sasuke.jpg";
+        }
+        if (n.contains("sakura")) {
+            return "/img/sakura.jpg";
+        }
+        if (n.contains("kakashi")) {
+            return "/img/kakashi.jpg";
+        }
+        if (n.contains("jiraiya") || n.contains("jiraiyah")) {
+            return "/img/jiraiyah.jpg";
+        }
+        if (n.contains("naruto")) {
+            return "/img/naruto.png";
+        }
+
+        return "/img/naruto.png";
+    }
 }

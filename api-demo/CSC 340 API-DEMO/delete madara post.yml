@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8080/characters/11
+  url: http://localhost:8080/characters/2
   body:
     type: json
     data: |-
