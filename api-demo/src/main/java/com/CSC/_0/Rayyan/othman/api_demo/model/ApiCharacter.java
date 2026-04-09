@@ -33,6 +33,11 @@ public class ApiCharacter {
         return id;
     }
 
+    // IMPORTANT FOR FORM BINDING
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -74,25 +79,25 @@ public class ApiCharacter {
     }
 
     @Transient
-public String getResolvedImage() {
-    String n = name == null ? "" : name.trim().toLowerCase();
+    public String getResolvedImage() {
+        String n = name == null ? "" : name.trim().toLowerCase();
 
-    if (n.contains("sasuke")) {
-        return "/img/sasuke.jpg";
-    }
-    if (n.contains("sakura")) {
-        return "/img/sakura.jpg";
-    }
-    if (n.contains("kakashi")) {
-        return "/img/kakashi.jpg";
-    }
-    if (n.contains("jiraiya") || n.contains("jiraiyah")) {
-        return "/img/jiraiyah.jpg";
-    }
-    if (n.contains("naruto")) {
+        if (n.contains("sasuke")) {
+            return "/img/sasuke.jpg";
+        }
+        if (n.contains("sakura")) {
+            return "/img/sakura.jpg";
+        }
+        if (n.contains("kakashi")) {
+            return "/img/kakashi.jpg";
+        }
+        if (n.contains("jiraiya") || n.contains("jiraiyah")) {
+            return "/img/jiraiyah.jpg";
+        }
+        if (n.contains("naruto")) {
+            return "/img/naruto.png";
+        }
+
         return "/img/naruto.png";
     }
-
-    return "/img/naruto.png";
-}
 }
