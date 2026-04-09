@@ -29,12 +29,11 @@ public class CharacterViewController {
     @GetMapping("/{id}")
     public String getCharacterById(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
-                .orElseThrow(() -> new RuntimeException("Character not found"));
+                .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
         model.addAttribute("character", character);
         return "character-details";
     }
 
-    // CREATE
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("character", new ApiCharacter());
@@ -47,11 +46,10 @@ public class CharacterViewController {
         return "redirect:/characters/" + saved.getId();
     }
 
-    // UPDATE
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
-                .orElseThrow(() -> new RuntimeException("Character not found"));
+                .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
         model.addAttribute("character", character);
         return "character-update";
     }
@@ -59,11 +57,10 @@ public class CharacterViewController {
     @PostMapping("/update")
     public String updateCharacter(ApiCharacter character) {
         ApiCharacter updated = characterService.updateCharacter(character.getId(), character)
-                .orElseThrow(() -> new RuntimeException("Update failed"));
+                .orElseThrow(() -> new RuntimeException("Character not found with id: " + character.getId()));
         return "redirect:/characters/" + updated.getId();
     }
 
-    // DELETE
     @GetMapping("/delete/{id}")
     public String deleteCharacter(@PathVariable Long id) {
         characterService.deleteCharacter(id);
