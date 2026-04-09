@@ -29,11 +29,12 @@ public class CharacterViewController {
     @GetMapping("/{id}")
     public String getCharacterById(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
-                .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Character not found"));
         model.addAttribute("character", character);
         return "character-details";
     }
 
+    // CREATE
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("character", new ApiCharacter());
@@ -42,24 +43,27 @@ public class CharacterViewController {
 
     @PostMapping("/create")
     public String createCharacter(ApiCharacter character) {
-        characterService.addCharacter(character);
-        return "redirect:/characters";
+        ApiCharacter saved = characterService.addCharacter(character);
+        return "redirect:/characters/" + saved.getId();
     }
 
+    // UPDATE
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
         ApiCharacter character = characterService.getCharacterById(id)
-                .orElseThrow(() -> new RuntimeException("Character not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Character not found"));
         model.addAttribute("character", character);
         return "character-update";
     }
 
     @PostMapping("/update")
     public String updateCharacter(ApiCharacter character) {
-        characterService.updateCharacter(character.getId(), character);
-        return "redirect:/characters/" + character.getId();
+        ApiCharacter updated = characterService.updateCharacter(character.getId(), character)
+                .orElseThrow(() -> new RuntimeException("Update failed"));
+        return "redirect:/characters/" + updated.getId();
     }
 
+    // DELETE
     @GetMapping("/delete/{id}")
     public String deleteCharacter(@PathVariable Long id) {
         characterService.deleteCharacter(id);

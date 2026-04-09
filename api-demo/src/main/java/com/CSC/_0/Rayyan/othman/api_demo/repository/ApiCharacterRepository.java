@@ -9,6 +9,6 @@ import com.CSC._0.Rayyan.othman.api_demo.model.ApiCharacter;
 public interface ApiCharacterRepository extends JpaRepository<ApiCharacter, Long> {
 
     List<ApiCharacter> findByRoleIgnoreCase(String role);
-    List<ApiCharacter> findByNameContainingIgnoreCase(String name);
 
+    List<ApiCharacter> findByNameContainingIgnoreCase(String name);
 }

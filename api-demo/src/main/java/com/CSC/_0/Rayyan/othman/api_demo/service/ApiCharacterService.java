@@ -1,4 +1,3 @@
-// src/main/java/com/CSC/_0/Rayyan/othman/api_demo/service/ApiCharacterService.java
 package com.CSC._0.Rayyan.othman.api_demo.service;
 
 import java.util.List;
@@ -30,23 +29,21 @@ public class ApiCharacterService {
         return repo.save(c);
     }
 
-    public Optional<ApiCharacter> updateCharacter(Long id, ApiCharacter updated) {
+    public Optional<ApiCharacter> updateCharacter(Long id, ApiCharacter c) {
         return repo.findById(id).map(existing -> {
-            existing.setName(updated.getName());
-            existing.setUniverse(updated.getUniverse());
-            existing.setRole(updated.getRole());
-            existing.setDescription(updated.getDescription());
+            existing.setName(c.getName());
+            existing.setUniverse(c.getUniverse());
+            existing.setRole(c.getRole());
+            existing.setDescription(c.getDescription());
+            existing.setImageUrl(c.getImageUrl());
             return repo.save(existing);
         });
     }
 
-    public boolean deleteCharacter(Long id) {
-        if (!repo.existsById(id)) return false;
+    public void deleteCharacter(Long id) {
         repo.deleteById(id);
-        return true;
     }
 
-   
     public List<ApiCharacter> getByRole(String role) {
         return repo.findByRoleIgnoreCase(role);
     }
